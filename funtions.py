@@ -8,7 +8,7 @@ def extraer_Texto(archivo, pagin, pagfin):
     open("datos.txt","w").close()
     for i in range((pagin - 1), pagfin):
         page = reader.pages[i]
-        with open("datos.txt","at") as fp:
+        with open(f"{archivo}.txt","at") as fp:
             fp.write(page.extract_text())
 
 def extraer_Imagenes(archivo, pagin, pagfin):
@@ -40,7 +40,7 @@ def encrypt(archivo, clave):
 
     writer.encrypt(clave, algorithm="AES-256")
 
-    with open("encriptado.pdf", "wb") as f:
+    with open(f"{archivo}-encriptado.pdf", "wb") as f:
         writer.write(f)
 
 def decrypt(archivo, clave):
@@ -53,7 +53,7 @@ def decrypt(archivo, clave):
     for page in reader.pages:
         writer.add_page(page)
 
-    with open("desencriptado.pdf", "wb") as f:
+    with open(f"{archivo}-desencriptado.pdf", "wb") as f:
         writer.write(f)
 
 def unirPDF(archivos):
@@ -62,16 +62,16 @@ def unirPDF(archivos):
     for pdf in archivos:
         merger.append(pdf)
 
-    merger.write("merged-pdf.pdf")
+    merger.write("merged.pdf")
     merger.close()
 
-def separarPDF(archivo):
+def separarPDF(archivo, pagin, pagfin):
     reader = PdfReader(open(archivo, "rb"))
-    writer = PdfWriter()
     
-    for i in range(len(reader.pages)):
+    for i in range((pagin - 1), pagfin):
+        writer = PdfWriter()
         writer.add_page(reader.pages[i])
-        writer.write(f"page-{i}.pdf")
+        writer.write(f"{archivo}-page-{i+1}.pdf")
         writer.close()
 
 def sello(archivo, marca):
@@ -84,7 +84,7 @@ def sello(archivo, marca):
     for page in writer.pages:
         page.merge_transformed_page(stamp,Transformation().scale(10), over=True,)
 
-    writer.write("sellado.pdf")
+    writer.write(f"{archivo}-sellado.pdf")
     remove("sello.pdf")
 
 def marcaAgua(archivo, marca):
@@ -97,7 +97,7 @@ def marcaAgua(archivo, marca):
     for page in writer.pages:
         page.merge_transformed_page(stamp,Transformation().scale(10), over=False,)
 
-    writer.write("marcado.pdf")
+    writer.write(f"{archivo}-marcado.pdf")
     remove("marca.pdf")
 
 def reducir(archivo):
@@ -110,5 +110,5 @@ def reducir(archivo):
     for page in writer.pages:
         page.compress_content_streams()
 
-    with open("comprimido.pdf", "wb") as f:
+    with open(f"{archivo}-comprimido.pdf", "wb") as f:
         writer.write(f)
