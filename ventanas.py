@@ -51,6 +51,8 @@ def ventanaImagenes():
     tk.Button(ventana_img, text="Iniciar extracción de imagenes",bg="white", command=datos).pack(expand=True)
 
     tk.Button(ventana_img, text="Iniciar extracción de documentos",bg="white", command=datos).pack(expand=True)
+    
+    ventana_img.mainloop()
 
 def ventanaEncrypt():
     def datos():
@@ -60,16 +62,18 @@ def ventanaEncrypt():
     
     password = tk.StringVar()
     
-    ventana_img = tk.Toplevel()
-    ventana_img.title("Encriptar PDF")
-    ventana_img.configure(background="#CFE1F7")
-    ventana_img.geometry("300x300")
-    ventana_img.resizable(False, False)
-    ventana_img.iconbitmap("pdf.ico")
+    ventana_enc = tk.Toplevel()
+    ventana_enc.title("Encriptar PDF")
+    ventana_enc.configure(background="#CFE1F7")
+    ventana_enc.geometry("300x300")
+    ventana_enc.resizable(False, False)
+    ventana_enc.iconbitmap("pdf.ico")
 
-    tk.Label(ventana_img, text="Ingrese la clave que se usara para desencriptar: ", bg="white").pack(expand=True)
-    tk.Entry(ventana_img, textvariable=password, bg="white").pack(expand=True)
-    tk.Button(ventana_img, text="Iniciar la encriptación del PDF",bg="white", command=datos).pack(expand=True)
+    tk.Label(ventana_enc, text="Ingrese la clave que se usara para desencriptar: ", bg="white").pack(expand=True)
+    tk.Entry(ventana_enc, textvariable=password, bg="white").pack(expand=True)
+    tk.Button(ventana_enc, text="Iniciar la encriptación del PDF",bg="white", command=datos).pack(expand=True)
+    
+    ventana_enc.mainloop()
 
 def ventanaDecrypt():
     def datos():
@@ -79,16 +83,18 @@ def ventanaDecrypt():
     
     password = tk.StringVar()
     
-    ventana_img = tk.Toplevel()
-    ventana_img.title("Desencriptar PDF")
-    ventana_img.configure(background="#CFE1F7")
-    ventana_img.geometry("300x300")
-    ventana_img.resizable(False, False)
-    ventana_img.iconbitmap("pdf.ico")
+    ventana_dec = tk.Toplevel()
+    ventana_dec.title("Desencriptar PDF")
+    ventana_dec.configure(background="#CFE1F7")
+    ventana_dec.geometry("300x300")
+    ventana_dec.resizable(False, False)
+    ventana_dec.iconbitmap("pdf.ico")
 
-    tk.Label(ventana_img, text="Ingrese la clave de desencriptación: ", bg="white").pack(expand=True)
-    tk.Entry(ventana_img, textvariable=password, bg="white").pack(expand=True)
-    tk.Button(ventana_img, text="Iniciar la desencriptación del PDF",bg="white", command=datos).pack(expand=True)
+    tk.Label(ventana_dec, text="Ingrese la clave de desencriptación: ", bg="white").pack(expand=True)
+    tk.Entry(ventana_dec, textvariable=password, bg="white").pack(expand=True)
+    tk.Button(ventana_dec, text="Iniciar la desencriptación del PDF",bg="white", command=datos).pack(expand=True)
+    
+    ventana_dec.mainloop()
 
 def ventanaSeparar():
     def datos():
@@ -100,18 +106,20 @@ def ventanaSeparar():
     pgin = tk.StringVar()
     pgfin = tk.StringVar()
     
-    ventana_img = tk.Toplevel()
-    ventana_img.title("Separar páginas de PDF")
-    ventana_img.configure(background="#CFE1F7")
-    ventana_img.geometry("300x300")
-    ventana_img.resizable(False, False)
-    ventana_img.iconbitmap("pdf.ico")
+    ventana_sep = tk.Toplevel()
+    ventana_sep.title("Separar páginas de PDF")
+    ventana_sep.configure(background="#CFE1F7")
+    ventana_sep.geometry("300x300")
+    ventana_sep.resizable(False, False)
+    ventana_sep.iconbitmap("pdf.ico")
 
-    tk.Label(ventana_img, text="Ingrese el primer número de página: ", bg="white").pack(expand=True)
-    tk.Entry(ventana_img, textvariable=pgin, bg="white").pack(expand=True)
-    tk.Label(ventana_img, text="Ingrese el último número de página: ", bg="white").pack(expand=True)
-    tk.Entry(ventana_img, textvariable=pgfin, bg="white").pack(expand=True)
-    tk.Button(ventana_img, text="Iniciar separación de páginas",bg="white", command=datos).pack(expand=True)
+    tk.Label(ventana_sep, text="Ingrese el primer número de página: ", bg="white").pack(expand=True)
+    tk.Entry(ventana_sep, textvariable=pgin, bg="white").pack(expand=True)
+    tk.Label(ventana_sep, text="Ingrese el último número de página: ", bg="white").pack(expand=True)
+    tk.Entry(ventana_sep, textvariable=pgfin, bg="white").pack(expand=True)
+    tk.Button(ventana_sep, text="Iniciar separación de páginas",bg="white", command=datos).pack(expand=True)
+    
+    ventana_sep.mainloop()
 
 def ventanaSello():
     def datos():
@@ -119,16 +127,16 @@ def ventanaSello():
         marca = filedialog.askopenfilename(filetypes=[("Image Files", "*.jpg;*.jpeg;*.png;*.img")])
         sello(archivo, marca)
 
-    ventana_img = tk.Toplevel()
-    ventana_img.title("Agregar sello")
-    ventana_img.configure(background="#CFE1F7")
-    ventana_img.geometry("300x300")
-    ventana_img.resizable(False, False)
-    ventana_img.iconbitmap("pdf.ico")
+    ventana_sel = tk.Toplevel()
+    ventana_sel.title("Agregar sello")
+    ventana_sel.configure(background="#CFE1F7")
+    ventana_sel.geometry("300x300")
+    ventana_sel.resizable(False, False)
+    ventana_sel.iconbitmap("pdf.ico")
 
-    tk.Button(ventana_img, text="Ingresa primero el archivo y despues el sello",bg="white", command=datos).pack(expand=True)
+    tk.Button(ventana_sel, text="Ingresa primero el archivo y despues el sello",bg="white", command=datos).pack(expand=True)
 
-    ventana_img.mainloop()
+    ventana_sel.mainloop()
 
 def ventanaAgua():
     def datos():
@@ -136,13 +144,13 @@ def ventanaAgua():
         marca = filedialog.askopenfilename(filetypes=[("Image Files", "*.jpg;*.jpeg;*.png;*.img")])
         marcaAgua(archivo, marca)
 
-    ventana_img = tk.Toplevel()
-    ventana_img.title("Agregar marca de agua")
-    ventana_img.configure(background="#CFE1F7")
-    ventana_img.geometry("300x300")
-    ventana_img.resizable(False, False)
-    ventana_img.iconbitmap("pdf.ico")
+    ventana_agu = tk.Toplevel()
+    ventana_agu.title("Agregar marca de agua")
+    ventana_agu.configure(background="#CFE1F7")
+    ventana_agu.geometry("300x300")
+    ventana_agu.resizable(False, False)
+    ventana_agu.iconbitmap("pdf.ico")
 
-    tk.Button(ventana_img, text="Ingresa primero el archivo y despues la marca de agua",bg="white", command=datos).pack(expand=True)
+    tk.Button(ventana_agu, text="Ingresa primero el archivo y despues la marca de agua",bg="white", command=datos).pack(expand=True)
 
-    ventana_img.mainloop()
+    ventana_agu.mainloop()
