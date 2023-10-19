@@ -50,8 +50,6 @@ def ventanaImagenes():
     tk.Entry(ventana_img, textvariable=pgfin, bg="white").pack(expand=True)
     tk.Button(ventana_img, text="Iniciar extracción de imagenes",bg="white", command=datos).pack(expand=True)
 
-    tk.Button(ventana_img, text="Iniciar extracción de documentos",bg="white", command=datos).pack(expand=True)
-    
     ventana_img.mainloop()
 
 def ventanaEncrypt():
@@ -69,7 +67,7 @@ def ventanaEncrypt():
     ventana_enc.resizable(False, False)
     ventana_enc.iconbitmap("pdf.ico")
 
-    tk.Label(ventana_enc, text="Ingrese la clave que se usara para desencriptar: ", bg="white").pack(expand=True)
+    tk.Label(ventana_enc, text="Ingrese la clave que se usara para encriptar: ", bg="white").pack(expand=True)
     tk.Entry(ventana_enc, textvariable=password, bg="white").pack(expand=True)
     tk.Button(ventana_enc, text="Iniciar la encriptación del PDF",bg="white", command=datos).pack(expand=True)
     
@@ -123,9 +121,12 @@ def ventanaSeparar():
 
 def ventanaSello():
     def datos():
+        escalado = float(escala.get())
         archivo = filedialog.askopenfilename(filetypes=[("PDF Files", "*.pdf")])
         marca = filedialog.askopenfilename(filetypes=[("Image Files", "*.jpg;*.jpeg;*.png;*.img")])
-        sello(archivo, marca)
+        sello(archivo, marca, escalado)
+    
+    escala = tk.StringVar()
 
     ventana_sel = tk.Toplevel()
     ventana_sel.title("Agregar sello")
@@ -134,15 +135,20 @@ def ventanaSello():
     ventana_sel.resizable(False, False)
     ventana_sel.iconbitmap("pdf.ico")
 
+    tk.Label(ventana_sel, text="Ingrese la escala del sello: ", bg="white").pack(expand=True)
+    tk.Entry(ventana_sel, textvariable=escala, bg="white").pack(expand=True)
     tk.Button(ventana_sel, text="Ingresa primero el archivo y despues el sello",bg="white", command=datos).pack(expand=True)
 
     ventana_sel.mainloop()
 
 def ventanaAgua():
     def datos():
+        escalado = float(escala.get())
         archivo = filedialog.askopenfilename(filetypes=[("PDF Files", "*.pdf")])
         marca = filedialog.askopenfilename(filetypes=[("Image Files", "*.jpg;*.jpeg;*.png;*.img")])
-        marcaAgua(archivo, marca)
+        marcaAgua(archivo, marca, escalado)
+
+    escala = tk.StringVar()
 
     ventana_agu = tk.Toplevel()
     ventana_agu.title("Agregar marca de agua")
@@ -151,6 +157,8 @@ def ventanaAgua():
     ventana_agu.resizable(False, False)
     ventana_agu.iconbitmap("pdf.ico")
 
+    tk.Label(ventana_agu, text="Ingrese la escala de la marca de agua: ", bg="white").pack(expand=True)
+    tk.Entry(ventana_agu, textvariable=escala, bg="white").pack(expand=True)
     tk.Button(ventana_agu, text="Ingresa primero el archivo y despues la marca de agua",bg="white", command=datos).pack(expand=True)
 
     ventana_agu.mainloop()

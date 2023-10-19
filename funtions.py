@@ -5,7 +5,7 @@ from os import remove
 def extraer_Texto(archivo, pagin, pagfin):
     reader = PdfReader(open(archivo, "rb"))
 
-    open("datos.txt","w").close()
+    open(f"{archivo}.txt","w").close()
     for i in range((pagin - 1), pagfin):
         page = reader.pages[i]
         with open(f"{archivo}.txt","at") as fp:
@@ -74,7 +74,7 @@ def separarPDF(archivo, pagin, pagfin):
         writer.write(f"{archivo}-page-{i+1}.pdf")
         writer.close()
 
-def sello(archivo, marca):
+def sello(archivo, marca, escalado):
     with open("sello.pdf", "wb") as documento:
         documento.write(img2pdf.convert(marca))
     
@@ -82,12 +82,12 @@ def sello(archivo, marca):
     writer = PdfWriter(clone_from=archivo)
     
     for page in writer.pages:
-        page.merge_transformed_page(stamp,Transformation().scale(10), over=True,)
+        page.merge_transformed_page(stamp,Transformation().scale(escalado), over=True,)
 
     writer.write(f"{archivo}-sellado.pdf")
     remove("sello.pdf")
 
-def marcaAgua(archivo, marca):
+def marcaAgua(archivo, marca, escalado):
     with open("marca.pdf", "wb") as documento:
         documento.write(img2pdf.convert(marca))
     
@@ -95,7 +95,7 @@ def marcaAgua(archivo, marca):
     writer = PdfWriter(clone_from=archivo)
     
     for page in writer.pages:
-        page.merge_transformed_page(stamp,Transformation().scale(10), over=False,)
+        page.merge_transformed_page(stamp,Transformation().scale(escalado), over=False,)
 
     writer.write(f"{archivo}-marcado.pdf")
     remove("marca.pdf")
